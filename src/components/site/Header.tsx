@@ -20,10 +20,10 @@ export function Header() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
         <Link to="/" onClick={() => setOpen(false)}><Logo /></Link>
         <nav aria-label="Principal" className="hidden lg:block">
-          <ul className="flex items-center gap-9">
+          <ul className="flex items-center gap-7 xl:gap-9">
             {navLinks.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} activeOptions={{ exact: true }} className="font-serif text-sm font-semibold uppercase tracking-[0.22em] text-cream/80 transition-colors hover:text-gold" activeProps={{ className: "!text-gold" }}>{l.label}</Link>
+                <Link to={l.to} activeOptions={{ exact: true }} className="font-serif text-[0.9375rem] font-semibold uppercase tracking-[0.16em] text-cream/85 transition-colors hover:text-gold" activeProps={{ className: "!text-gold" }}>{l.label}</Link>
               </li>
             ))}
           </ul>

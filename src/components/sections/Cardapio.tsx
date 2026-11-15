@@ -17,7 +17,7 @@ export function Cardapio({ asPage = false }: { asPage?: boolean }) {
             <p className="reveal max-w-xs border-l-2 border-brick pl-4 text-sm text-muted-foreground">
               {asPage ? "Esses são os sabores que a gente mostra no Instagram." : "Esses são os que o bairro mais pede."}{" "}
               O cardápio inteiro, com preço e tamanho,{" "}
-              <a href={pedidoUrl()} target="_blank" rel="noopener noreferrer" className="font-semibold text-gold underline underline-offset-4 hover:text-cream">
+              <a href={pedidoUrl()} target="_blank" rel="noopener noreferrer" className="font-bold text-gold underline underline-offset-4 hover:text-cream">
                 {noApp ? "tá no app" : "é só pedir pra gente"}
               </a>.
             </p>

@@ -8,6 +8,8 @@ import { Diferenciais } from "@/components/sections/Diferenciais";
 import { Galeria } from "@/components/sections/Galeria";
 import { PedidoCTA } from "@/components/sections/PedidoCTA";
 import { Contato } from "@/components/sections/Contato";
+import { Avaliacoes } from "@/components/sections/Avaliacoes";
+import { Faq } from "@/components/sections/Faq";
 
 const e = pizzaria.endereco;
 const jsonLd = {
@@ -25,5 +27,5 @@ export const Route = createFileRoute("/")({
     meta: seo("Pizzaria O Brabo — Pizza artesanal no forno a lenha", "Pizza artesanal, massa de longa fermentação e forno a lenha. No fogo, a gente faz história. Bora pedir?"),
     scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
   }),
-  component: () => (<><Hero /><Essencia /><Cardapio /><Diferenciais /><Galeria /><PedidoCTA /><Contato /></>),
+  component: () => (<><Hero /><Essencia /><Cardapio /><Diferenciais /><Galeria /><Avaliacoes /><PedidoCTA /><Contato /><Faq /></>),
 });

@@ -72,13 +72,15 @@
 }
 
 @utility eyebrow {
-  /* SPEC-07: no celular, letra maior e menos espaçamento para não quebrar em duas linhas. */
+  /* SPEC-07/17: Cormorant tem traço fino, nunca abaixo de 14px; caixa alta com espaçamento moderado. */
   font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 0.2em;
-  font-size: 0.875rem; font-weight: 600; color: var(--gold);
-  @media (width >= 40rem) { letter-spacing: 0.35em; font-size: 0.8rem; }
+  font-size: 0.9rem; font-weight: 600; color: var(--gold);
+  @media (width >= 40rem) { letter-spacing: 0.26em; font-size: 0.95rem; }
 }
 @utility title-display {
-  font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.05; color: var(--gold);
+  font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.12; color: var(--gold); font-weight: 400;
+  /* As classes de tamanho (text-5xl…) usam --tw-leading quando existe: assim a entrelinha vale com qualquer tamanho e os acentos (HISTÓRIA) não encostam na linha de cima. */
+  --tw-leading: 1.12;
 }
 @utility gold-rule {
   height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent);

@@ -39,7 +39,7 @@ export function Footer() {
         </div>
       </div>
       <div className="gold-rule" />
-      <p className="px-5 py-6 text-center text-xs uppercase tracking-[0.25em] text-cream/50">© {new Date().getFullYear()} {pizzaria.nome}{pizzaria.desde ? ` · Desde ${pizzaria.desde}` : ""}</p>
+      <p className="px-5 py-6 text-center text-[0.8125rem] uppercase tracking-[0.2em] text-cream/70">© {new Date().getFullYear()} {pizzaria.nome}{pizzaria.desde ? ` · Desde ${pizzaria.desde}` : ""}</p>
     </footer>
   );
 }

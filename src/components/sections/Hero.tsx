@@ -14,7 +14,7 @@ function FaixaInfo() {
   if (!itens.length) return null;
   return (
     <div className="border-y border-gold/20 bg-coal-soft">
-      <ul className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-4 sm:gap-x-4 text-center font-serif text-sm font-semibold uppercase tracking-[0.15em] text-cream lg:px-8">
+      <ul className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-4 sm:gap-x-4 text-center font-serif text-[0.9375rem] font-semibold uppercase tracking-[0.12em] text-cream lg:px-8">
         {itens.map((t, i) => (
           <li key={t} className="flex items-center gap-4">
             {i > 0 && <span className="hidden h-1 w-1 rounded-full bg-gold sm:block" aria-hidden />}

@@ -138,6 +138,39 @@ export const galeria: FotoGaleria[] = [
   { src: entradinhas, alt: "Entradinhas assadas servidas na tábua", w: 1024, h: 1280, span: "md:col-span-3" },
 ];
 
+/**
+ * Avaliações reais de clientes (SPEC-06). NUNCA inventar: só texto copiado de uma avaliação pública
+ * (Google, iFood, Instagram) ou enviada pelo cliente, com autorização para publicar.
+ * Vazio: a seção não aparece no site (em desenvolvimento, mostra cards de exemplo marcados como tal).
+ */
+export type Avaliacao = { nome: string; texto: string; nota: 1 | 2 | 3 | 4 | 5; fonte?: string; link?: string };
+export const avaliacoes: Avaliacao[] = [];
+
+/**
+ * Perguntas frequentes (SPEC-15). As respostas são montadas a partir dos dados acima:
+ * mudou o horário ou a entrega, o FAQ acompanha. Pergunta sem dado não aparece.
+ */
+export type Pergunta = { pergunta: string; resposta: string };
+const lista = (itens: string[]) => new Intl.ListFormat("pt-BR", { type: "conjunction" }).format(itens);
+
+export function perguntasFrequentes(): Pergunta[] {
+  const p = pizzaria;
+  const apps = p.entrega?.apps.filter((a) => a !== "Anota AI") ?? [];
+  const canais = [p.linkPedidos && "pelo nosso app de pedidos", p.whatsapp && "pelo WhatsApp", apps.length && `pelos apps ${lista(apps)}`].filter(Boolean) as string[];
+  const ou = (itens: string[]) => new Intl.ListFormat("pt-BR", { type: "disjunction" }).format(itens);
+  const temNutella = outrosSabores.some((s) => /nutella/i.test(s.nome));
+  const itens: (Pergunta | null)[] = [
+    canais.length ? { pergunta: "Como faço meu pedido?", resposta: `Você pode pedir ${ou(canais)}. É só tocar em "Pedir" em qualquer parte do site.` } : null,
+    p.entrega ? { pergunta: "Vocês entregam no meu bairro?", resposta: `A gente entrega num raio de até ${p.entrega.raioKm} km da pizzaria${p.endereco ? `, na ${p.endereco.rua}` : ""}. ${p.entrega.taxa ? `A taxa é ${p.entrega.taxa}.` : "Pra saber a taxa do seu endereço, é só colocar o CEP no app ou chamar a gente no WhatsApp."}` } : null,
+    p.horarios?.length ? { pergunta: "Qual o horário de funcionamento?", resposta: `${p.horarios.map((h) => `${h.dias}: ${h.horas}`).join(". ")}.` } : null,
+    p.salao ? { pergunta: "Dá pra comer aí na pizzaria?", resposta: `Dá sim. O salão tem ${p.salao.mesas} mesas, ${p.salao.lugares} lugares e o forno a lenha à vista. Se preferir, também dá pra retirar no balcão.` } : null,
+    { pergunta: "O que é a massa de fermentação de 24h?", resposta: "A massa descansa 24 horas nos potes antes de ser aberta. Esse tempo deixa a pizza mais leve e a borda bem aerada." },
+    { pergunta: "Tem promoção?", resposta: `Toda terça tem a Terça Maluca, com sabores em promoção. Os sabores e valores da semana saem no nosso Instagram (${p.instagram.handle}).` },
+    { pergunta: "Tem pizza doce?", resposta: `Tem, como a de morango com chocolate${temNutella ? ", e também borda recheada de Nutella" : ""}. Os sabores do dia aparecem no cardápio do app.` },
+  ];
+  return itens.filter(Boolean) as Pergunta[];
+}
+
 export const navLinks = [
   { to: "/", label: "Início" },
   { to: "/historia", label: "Nossa História" },

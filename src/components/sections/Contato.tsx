@@ -7,12 +7,12 @@ function Item({ icon, label, children }: { icon: ReactNode; label: string; child
   return (
     <div className="flex gap-5 border-b border-coal/15 py-6">
       <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-brick text-brick">{icon}</span>
-      <div><p className="font-serif text-xs font-bold uppercase tracking-[0.3em] text-brick">{label}</p><div className="mt-1 text-lg">{children}</div></div>
+      <div><p className="font-serif text-sm font-semibold uppercase tracking-[0.2em] text-brick">{label}</p><div className="mt-1 text-lg">{children}</div></div>
     </div>
   );
 }
 
-const link = "font-semibold underline-offset-4 hover:underline";
+const link = "font-bold underline-offset-4 hover:underline";
 
 export function Contato({ asPage = false }: { asPage?: boolean }) {
   const end = enderecoTexto();

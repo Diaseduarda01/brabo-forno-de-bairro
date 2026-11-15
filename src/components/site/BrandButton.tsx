@@ -7,12 +7,12 @@ export const brandButton = cva(
   {
     variants: {
       variant: {
-        fire: "bg-ember text-coal hover:bg-gold px-7 py-4 font-semibold",
-        gold: "bg-gold text-coal hover:bg-cream px-7 py-4 font-semibold",
+        fire: "bg-ember text-coal hover:bg-gold px-7 py-4 font-bold",
+        gold: "bg-gold text-coal hover:bg-cream px-7 py-4 font-bold",
         outline: "border border-gold/70 text-gold hover:bg-gold hover:text-coal px-7 py-4",
         ghost: "text-cream hover:text-gold underline-offset-8 hover:underline px-0 py-2",
       },
-      size: { sm: "!px-4 !py-2.5 text-xs", md: "" },
+      size: { sm: "!px-4 !py-2.5 text-sm", md: "" },
     },
     defaultVariants: { variant: "fire", size: "md" },
   },
