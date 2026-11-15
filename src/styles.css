@@ -72,8 +72,10 @@
 }
 
 @utility eyebrow {
-  font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 0.35em;
-  font-size: 0.8rem; font-weight: 600; color: var(--gold);
+  /* SPEC-07: no celular, letra maior e menos espaçamento para não quebrar em duas linhas. */
+  font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 0.2em;
+  font-size: 0.875rem; font-weight: 600; color: var(--gold);
+  @media (width >= 40rem) { letter-spacing: 0.35em; font-size: 0.8rem; }
 }
 @utility title-display {
   font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.05; color: var(--gold);
@@ -107,7 +109,7 @@
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 @keyframes spin-slow { to { transform: rotate(360deg); } }
 @keyframes flicker { 0%,100% { opacity: .85 } 50% { opacity: 1 } }
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+.reveal { opacity: .35; transform: translateY(16px); transition: opacity .45s ease-out, transform .45s ease-out; }
 .reveal.is-in { opacity: 1; transform: none; }
 .animate-rise { animation: rise 1s ease both; }
 .animate-spin-slow { animation: spin-slow 40s linear infinite; }

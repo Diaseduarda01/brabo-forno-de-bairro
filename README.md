@@ -403,23 +403,25 @@ A primeira impressão deve fazer o visitante pensar:
 
 Implemente o projeto completo, não apenas um protótipo estático ou uma landing page incompleta.
 
-This project was built with [Lovable](https://lovable.dev).
+## Desenvolvimento
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/b4d504d4-1f26-47e6-9356-e15013b61df1).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Precisa de Node.js 20+ e npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # gera .output/ (servidor Node) fora do Vercel
+npm test
 ```
+
+Dados da pizzaria (contato, horários, cardápio, galeria) ficam só em `src/data/pizzaria.ts`.
+
+## Deploy no Vercel
+
+Importe o repositório no Vercel e deixe as configurações detectadas:
+
+- **Framework preset:** Other (ou Vite)
+- **Build command:** `npm run build`
+- **Install command:** `npm install`
+
+O Nitro detecta o ambiente do Vercel durante o build e gera `.vercel/output` com as funções de SSR e os arquivos estáticos. Não precisa de `vercel.json`.

@@ -1,12 +1,22 @@
 import { useEffect } from "react";
-import { useRouterState } from "@tanstack/react-router";
-/** Animação sutil de entrada para elementos com a classe `.reveal`. */
+/**
+ * Animação sutil de entrada para elementos com a classe `.reveal`.
+ * Um MutationObserver registra todo `.reveal` que entra no DOM (troca de rota, conteúdo carregado depois),
+ * então nenhum elemento fica preso apagado em .35 por ter sido montado depois do efeito.
+ */
 export function useReveal() {
-  const path = useRouterState({ select: (s) => s.location.pathname });
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal:not(.is-in)");
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [path]);
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }),
+      { rootMargin: "0px 0px 15% 0px" },
+    );
+    const registrar = (raiz: ParentNode) => {
+      if (raiz instanceof Element && raiz.matches(".reveal:not(.is-in)")) io.observe(raiz);
+      raiz.querySelectorAll(".reveal:not(.is-in)").forEach((el) => io.observe(el));
+    };
+    registrar(document);
+    const mo = new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => { if (n instanceof Element) registrar(n); })));
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => { mo.disconnect(); io.disconnect(); };
+  }, []);
 }

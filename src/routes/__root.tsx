@@ -8,30 +8,25 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/components/site/useReveal";
+import { brandButton } from "@/components/site/BrandButton";
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
+// SPEC-07: 404 e erro em português, na identidade da marca.
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="texture-coal flex min-h-[70vh] items-center justify-center px-5 py-24">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
+        <p className="eyebrow">Erro 404</p>
+        <h1 className="title-display mt-5 text-5xl sm:text-6xl">Essa saiu do forno errado.</h1>
+        <p className="mt-6 text-lg text-muted-foreground">A página que você procurou não existe. Volta pro começo ou vai direto no cardápio.</p>
+        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+          <Link to="/" className={brandButton()}>Voltar pro início</Link>
+          <Link to="/cardapio" className={brandButton({ variant: "outline" })}>Ver o cardápio</Link>
         </div>
       </div>
     </div>
@@ -41,35 +36,24 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="texture-coal flex min-h-screen items-center justify-center px-5 py-24">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <p className="eyebrow">Ops</p>
+        <h1 className="title-display mt-5 text-4xl sm:text-5xl">A página não carregou.</h1>
+        <p className="mt-6 text-lg text-muted-foreground">Deu um problema do nosso lado. Tenta de novo ou volta pro início.</p>
+        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className={brandButton()}
           >
-            Try again
+            Tentar de novo
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
+          <a href="/" className={brandButton({ variant: "outline" })}>Voltar pro início</a>
         </div>
       </div>
     </div>

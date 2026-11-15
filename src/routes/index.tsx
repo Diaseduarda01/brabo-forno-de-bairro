@@ -16,13 +16,13 @@ const jsonLd = {
   name: pizzaria.nome,
   servesCuisine: "Pizza",
   sameAs: [pizzaria.instagram.url],
-  ...(e && { address: { "@type": "PostalAddress", streetAddress: e.rua, addressLocality: e.cidade, addressRegion: e.uf, postalCode: e.cep, addressCountry: "BR" } }),
+  ...(e && { address: { "@type": "PostalAddress", streetAddress: e.rua, addressLocality: e.cidade ?? undefined, addressRegion: e.uf ?? undefined, postalCode: e.cep ?? undefined, addressCountry: "BR" } }),
   ...(pizzaria.whatsapp && { telephone: `+${pizzaria.whatsapp}` }),
 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: seo("Pizzaria O Brabo — Pizza artesanal no forno a lenha", "Pizza artesanal, massa de longa fermentação e forno a lenha. No fogo, a gente faz história. Bora pedir? 🍕"),
+    meta: seo("Pizzaria O Brabo — Pizza artesanal no forno a lenha", "Pizza artesanal, massa de longa fermentação e forno a lenha. No fogo, a gente faz história. Bora pedir?"),
     scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
   }),
   component: () => (<><Hero /><Essencia /><Cardapio /><Diferenciais /><Galeria /><PedidoCTA /><Contato /></>),

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Icon } from "@/components/site/Icon";
 import { useEffect, useState } from "react";
 import { navLinks, pedidoUrl } from "@/data/pizzaria";
 import { Logo } from "./Logo";
@@ -29,9 +29,10 @@ export function Header() {
           </ul>
         </nav>
         <div className="flex items-center gap-3">
-          <BrandLink href={pedidoUrl()} size="sm" className="hidden sm:inline-flex">Fazer meu pedido</BrandLink>
+          {/* SPEC-02: pedido a 1 toque também no celular. */}
+          <BrandLink href={pedidoUrl()} size="sm"><span className="sm:hidden">Pedir</span><span className="hidden sm:inline">Fazer meu pedido</span></BrandLink>
           <button className="p-2 text-gold lg:hidden" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open}>
-            {open ? <X className="h-7 w-7" strokeWidth={1.25} /> : <Menu className="h-7 w-7" strokeWidth={1.25} />}
+            {open ? <Icon name="close" className="h-7 w-7" /> : <Icon name="menu" className="h-7 w-7" />}
           </button>
         </div>
       </div>
@@ -46,7 +47,7 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <BrandLink href={pedidoUrl()} className="mt-auto w-full">Fazer meu pedido 🔥</BrandLink>
+          <BrandLink href={pedidoUrl()} className="mt-auto w-full">Fazer meu pedido</BrandLink>
         </div>
       )}
     </header>
